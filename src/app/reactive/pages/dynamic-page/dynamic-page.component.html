@@ -11,9 +11,10 @@
         <div class="col-sm-9">
             <input class="form-control"
                    placeholder="Nombre de la persona">
-            <span formControlName="name"
+            <span *ngIf="isValidField('name')" 
+                formControlName="name"
                  class="form-text text-danger">
-                   error message
+                   {{getFieldError('name')}}
             </span>
         </div>
     </div>
@@ -42,7 +43,7 @@
         <label class="col-sm-3 col-form-label">Favoritos</label>
         <div class="col-sm-9" formArrayName="favoritesGames ">
 
-            <div class="mb-1" *ngFor="let favorite of favoriteGames.controls  ; let i = index">
+            <div class="mb-1" *ngFor="let favorite of favoritesGames.controls  ; let i = index">
 
                 <div class="input-group">
                     <input [formControlName]="i"
@@ -53,9 +54,11 @@
                       Eliminar
                   </button>
                 </div>
-                <span class="form-text text-danger">
+                 <span *ngIf="isValidFieldInArray(favoritesGames,i)" 
+                formControlName="name"
+                 class="form-text text-danger">
                    Este campo es requerido
-                </span>
+            </span>
 
             </div>
 

@@ -23,9 +23,40 @@ export class DynamicPageComponent {
 
   constructor (private fb : FormBuilder){}
 
-  get favoriteGames(){
+  get favoritesGames(){
     return this.myForm.get('favoritesGames') as FormArray
   }
+
+  isValidField(field : string): boolean| null{
+    return this.myForm.controls[field].errors 
+          && this.myForm.controls[field].touched
+  }
+
+  isValidFieldInArray(formArray : FormArray, i : number){
+    return formArray.controls[i].errors 
+    && formArray.controls[i].touched;
+  }
+
+  getFieldError(field : string): string | null{
+    if(!this.myForm.controls[field] )return null;
+    const errors= this.myForm.controls[field].errors ||{};
+
+    for(const key of Object.keys(errors)){
+      switch(key){
+        case 'required': 
+          return 'Este campo es requerido';
+
+        case 'minlength': 
+          return `Minimo ${errors['minlength'].requiredLength} caracters`;         
+      }
+      console.log(key);
+      
+    }
+
+    return null
+  }
+
+
   onSumit(){
     if(this.myForm.invalid){
       this.myForm.markAllAsTouched();
