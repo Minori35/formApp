@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SareMenuComponent } from './components/sare-menu/sare-menu.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SareMenuComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
+  ],
+  exports:[
+    SareMenuComponent
   ]
 })
 export class SharedModule { }
