@@ -32,9 +32,9 @@ export class DynamicPageComponent {
           && this.myForm.controls[field].touched
   }
 
-  isValidFieldInArray(formArray : FormArray, i : number){
-    return formArray.controls[i].errors 
-    && formArray.controls[i].touched;
+  isValidFieldInArray( formArray: FormArray, index: number ) {
+    return formArray.controls[index].errors
+        && formArray.controls[index].touched;
   }
 
   getFieldError(field : string): string | null{
@@ -54,6 +54,10 @@ export class DynamicPageComponent {
     }
 
     return null
+  }
+
+  onDeletefavorite(i : number){
+   this.favoritesGames.removeAt(i);
   }
 
 
