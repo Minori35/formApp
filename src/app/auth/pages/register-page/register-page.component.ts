@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormGroup  , FormBuilder, Validators} from "@angular/forms";
-import * as customVaidator from 'src/app/shared/validators/validators.funtions';
+import { ValidatorsService } from 'src/app/shared/services/validators.sevices';
+
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
@@ -10,20 +11,22 @@ import * as customVaidator from 'src/app/shared/validators/validators.funtions';
 export class RegisterPageComponent {
 
   public myForm : FormGroup = this.fb.group({
-    name:['', [Validators.required, Validators.pattern(customVaidator.firstNameAndLastnamePattern) ]],
-    email: ['', [Validators.required, Validators.pattern(customVaidator.emailPattern)]],
-    username: ['', [Validators.required, customVaidator.cantBeStrider]],
+    name:['', [Validators.required, Validators.pattern(this.validatorservices.firstNameAndLastnamePattern) ]],
+    email: ['', [Validators.required, Validators.pattern(this.validatorservices.emailPattern)]],
+    username: ['', [Validators.required, this.validatorservices.cantBeStrider]],
     password: ['',[Validators.required, Validators.minLength(6)]],
     password2: ['',[Validators.required]],
 
   });
 
-  constructor( private fb: FormBuilder){
+  constructor( 
+    private fb: FormBuilder,
+    private validatorservices: ValidatorsService){
 
   }
 
   isValidField(field: string){
-    // TODO: obtener validacion desde un servicio
+    return this.validatorservices.isValidField(this.myForm, field)
   }
 
   onSubmit(){
