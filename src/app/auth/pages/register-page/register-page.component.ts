@@ -17,8 +17,13 @@ export class RegisterPageComponent {
     // email: ['', [Validators.required, Validators.pattern(this.validatorservices.emailPattern)], [new EmailValidator()]],
     username: ['', [Validators.required, this.validatorservices.cantBeStrider]],
     password: ['',[Validators.required, Validators.minLength(6)]],
-    password2: ['',[Validators.required]],
+    password2: ['',[Validators.required],]
 
+  },{
+    //aqui nos deja validar en cada campo(En todo el formulario) en este caso password y passwor2
+    validators:[
+      this.validatorservices.isFieldOneEqualFieldTwo('password', 'password2')
+    ]
   });
 
   constructor( 

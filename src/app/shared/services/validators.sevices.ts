@@ -29,4 +29,25 @@ isValidField(form: FormGroup, field : string): boolean| null{
     return form.controls[field].errors 
           && form.controls[field].touched
   }
+
+  isFieldOneEqualFieldTwo(field: string , field2: string){
+    return (FormGroup : FormGroup) : ValidationErrors | null =>{
+        const fieldValue1 = FormGroup.get(field)?.value;
+        const fieldValue2 = FormGroup.get(field2)?.value;
+
+        if(fieldValue1 !== fieldValue2){
+            FormGroup.get(field2)?.setErrors({notEqual: true})
+            return {notEqual : true}
+        }
+
+        FormGroup.get(field2)?.setErrors(null)
+
+        return null;
+
+        
+
+
+    }
+  }
+  
 }
